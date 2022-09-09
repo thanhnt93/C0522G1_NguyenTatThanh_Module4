@@ -13,7 +13,7 @@ public class DictionaryController {
     @Autowired
     private IDictionaryService dictionaryService;
 
-    @GetMapping("/trans")
+    @GetMapping("/")
     public String dictionary() {
 
         return "translate";

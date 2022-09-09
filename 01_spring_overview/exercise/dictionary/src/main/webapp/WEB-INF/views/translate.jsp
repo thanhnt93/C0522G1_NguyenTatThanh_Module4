@@ -15,7 +15,7 @@
 <form method="post">
     <input type="text" name="english" placeholder="Nhập tiếng anh: "/><br><br>
     <input type="submit" id="submit" value="Search"/><br><br>
-    <span style="">result : ${result}</span>
+    <span>Result : ${result}</span>
 </form>
 </body>
 </html>

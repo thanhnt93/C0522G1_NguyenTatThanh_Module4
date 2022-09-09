@@ -14,6 +14,10 @@ public class DictionaryRepository implements IDictionaryRepository {
     public String translate(String english) {
         {
             mapDictionary.put("hello", "xin chào");
+            mapDictionary.put("world","thế giới");
+            mapDictionary.put("bear","con gấu");
+            mapDictionary.put("street","con đường");
+            mapDictionary.put("bean","hạt đậu");
         }
         return mapDictionary.get(english);
     }

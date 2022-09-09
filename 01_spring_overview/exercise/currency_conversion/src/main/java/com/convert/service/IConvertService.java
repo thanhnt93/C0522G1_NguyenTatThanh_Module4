@@ -1,5 +1,5 @@
 package com.convert.service;
 
-public interface IConvert {
+public interface IConvertService {
     Double money(Double usd);
 }

@@ -1,7 +1,7 @@
-package com.chuyendoi.controller;
+package com.convert.controller;
 
-import com.chuyendoi.service.Convert;
-import com.chuyendoi.service.IConvert;
+import com.convert.service.IConvertService;
+import com.convert.service.impl.ConvertService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,18 +11,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MoneyController {
-    @Autowired
-    private IConvert convert;
 
-    @GetMapping("")
-    public String chuyenDoi() {
-        return "result";
+    @Autowired
+    private IConvertService convertService;
+
+    @GetMapping("/convert")
+    public String convert() {
+        return "convertMoney";
     }
 
-    @PostMapping
+    @GetMapping("result")
     public String converts(@RequestParam double usd, Model model) {
-        Double results = convert.money(usd);
-        model.addAttribute("results", results);
-        return "result";
+        Double convertMoney = convertService.money(usd);
+        model.addAttribute("convertMoney", convertMoney);
+        return "convertMoney";
     }
 }

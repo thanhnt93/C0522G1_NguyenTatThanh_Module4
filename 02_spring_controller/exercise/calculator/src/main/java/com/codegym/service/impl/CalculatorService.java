@@ -7,23 +7,25 @@ import org.springframework.stereotype.Service;
 public class CalculatorService implements ICalculator {
 
     @Override
-    public Double calculate(String string, double num1, double num2) {
-        double result = 0;
-        switch (string) {
-            case "add":
-                result = num1 + num2;
-                break;
-            case "sub":
-                result = num1 - num2;
-                break;
-            case "mul":
-                result = num1 * num2;
-                break;
-            case "div":
-                result = num1 / num2;
-                break;
-
+    public String calculate(String string, double num1, double num2) {
+        try {
+            switch (string) {
+                case "add":
+                    return String.valueOf(num1 + num2);
+                case "sub":
+                    return String.valueOf(num1 - num2);
+                case "mul":
+                    return String.valueOf(num1 * num2);
+                case "div":
+                    if (num2 == 0) {
+                        return "Not divisible by 0";
+                    } else {
+                        return String.valueOf(num1 / num2);
+                    }
+            }
+        } catch (NumberFormatException e) {
+            return "Please input number !";
         }
-return result;
+        return "";
     }
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class Calculator {
+public class CalculatorController {
     @Autowired
     ICalculator calculator;
 
@@ -21,8 +21,9 @@ public class Calculator {
     @GetMapping("/calculate")
     public String calculate(@RequestParam String string,
                             @RequestParam(defaultValue = "0") double num1,
-                            @RequestParam(defaultValue = "0") double num2, Model model) {
-        double result = calculator.calculate(string, num1, num2);
+                            @RequestParam(defaultValue = "0") double num2,
+                            Model model) {
+        String result = calculator.calculate(string, num1, num2);
         model.addAttribute("result", result);
         model.addAttribute("num1", num1);
         model.addAttribute("num2", num2);

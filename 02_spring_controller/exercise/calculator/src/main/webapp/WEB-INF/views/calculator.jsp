@@ -9,7 +9,7 @@
 <html>
 <head>
     <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Calculator_icon.svg/2048px-Calculator_icon.svg.png">
-    <title>Máy tính đơn giản</title>
+    <title>Calculate</title>
 </head>
 <body>
 <form method="get" action="calculate">

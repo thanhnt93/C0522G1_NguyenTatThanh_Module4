@@ -1,61 +1,34 @@
 package com.codegym.model;
 
+
+import lombok.Getter;
+import lombok.Setter;
+
 public class Mail {
-private  int id;
 
-    public int getId() {
-        return id;
-    }
+    @Getter @Setter
+    private int id;
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    @Getter @Setter
     private String languages;
+
+    @Getter @Setter
     private String pageSize;
-    private String spamsFillter;
+
+    @Getter @Setter
+    private String spamsFilter;
+
+    @Getter @Setter
     private String signature;
 
     public Mail() {
     }
 
-    public Mail(int id, String languages, String pageSize, String spamsFillter, String signature) {
+    public Mail(int id, String languages, String pageSize, String spamsFilter, String signature) {
         this.id = id;
         this.languages = languages;
         this.pageSize = pageSize;
-        this.spamsFillter = spamsFillter;
-        this.signature = signature;
-    }
-
-    public String getLanguages() {
-        return languages;
-    }
-
-    public void setLanguages(String languages) {
-        this.languages = languages;
-    }
-
-    public String getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(String pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public String getSpamsFillter() {
-        return spamsFillter;
-    }
-
-    public void setSpamsFillter(String spamsFillter) {
-        this.spamsFillter = spamsFillter;
-    }
-
-    public String getSignature() {
-        return signature;
-    }
-
-    public void setSignature(String signature) {
+        this.spamsFilter = spamsFilter;
         this.signature = signature;
     }
 
@@ -64,7 +37,7 @@ private  int id;
         return "Mail{" +
                 "languages='" + languages + '\'' +
                 ", pageSize='" + pageSize + '\'' +
-                ", spamsFillter='" + spamsFillter + '\'' +
+                ", spamsFilter='" + spamsFilter + '\'' +
                 ", signature='" + signature + '\'' +
                 '}';
     }

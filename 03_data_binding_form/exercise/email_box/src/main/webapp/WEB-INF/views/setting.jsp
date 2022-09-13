@@ -22,7 +22,7 @@
 
 </head>
 <body>
-<form:form modelAttribute="mail" method="post" action="/edit">
+<form:form modelAttribute="mail" method="post" action="/update">
     <table class="table" style="border: #e3e3ff solid 2px">
         <tr>
             <td><h2>Settings</h2></td>
@@ -32,9 +32,9 @@
             <td><b>Languages : </b></td>
             <td style="transform: translateX(-400px);">
                 <form:select path="languages">
-                    <form:option value="english" label="English"/>
-                    <form:option value="vietnamese" label="Vietnamese"/>
-                    <form:option value="korea" label="Korea"/>
+                    <form:option value="English" label="English"/>
+                    <form:option value="Vietnamese" label="Vietnamese"/>
+                    <form:option value="Korea" label="Korea"/>
                 </form:select>
             </td>
         </tr>
@@ -59,7 +59,7 @@
                 <b> Spams filter: </b>
             </td>
             <td style="transform: translateX(-400px)">
-                <form:checkbox path="spamsFillter" value="spamsFillter"/>
+                <form:checkbox path="spamsFilter" value="spamsFilter"/>
                 Enable spams filter
             </td>
         </tr>
@@ -68,7 +68,7 @@
                 <b> Signature: </b>
             </td>
             <td style="transform: translateX(-400px)">
-                <form:input path="signature" cssStyle="width:200px; height: 100px; "/>
+                <form:textarea path="signature"/>
             </td>
         </tr>
         <tr>
@@ -82,13 +82,13 @@
 </form:form>
 <table class="table" style="border: #e3e3ff solid 2px">
     <tr>
-        <h6> Language : ${mail1.languages}</h6>
+        <h6> Language : ${mail.languages}</h6>
 
-        <h6> PageSize : ${mail1.pageSize}</h6>
+        <h6> PageSize : ${mail.pageSize}</h6>
 
-        <h6> SpamsFilter : ${mail1.spamsFillter}</h6>
+        <h6> SpamsFilter : ${mail.spamsFilter}</h6>
 
-        <h6> Signature : ${mail1.signature}</h6>
+        <h6> Signature : ${mail.signature}</h6>
     </tr>
 </table>
 

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+
+</head>
+<body>
+<h3 style="text-align: center"><b>PRODUCT</b></h3>
+
+<div class="row container-fluid" style="transform: translateY(-15px)">
+    <div class="col-lg-6">
+        <a th:href="@{/create}">
+            <button class="btn btn-info">
+                Thêm mới sản phẩm
+            </button>
+        </a>
+    </div>
+    <div class="col-lg-6">
+        <form class="d-flex" th:action="@{/search}" method="post" style="transform: translateX(380px)">
+
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="name" style="width: 300px">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+</div>
+
+
+
+<table id = "productList" class="table table-striped">
+    <thead>
+
+    <tr>
+        <th style="text-align: center">Tên sản phẩm</th>
+        <th style="text-align: center">Giá tiền</th>
+        <th style="text-align: center">Người sản xuất</th>
+        <th style="text-align: center">Cập nhập</th>
+        <th style="text-align: center">Xóa</th>
+        <th style="text-align: center">Xem</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row : ${productList}">
+        <td th:text="${row.getName()}"></td>
+        <td th:text="${row.getPrice()}"></td>
+        <td th:text="${row.getProducer()}"></td>
+        <td style="text-align: center"><a th:href="@{/{id}/edit(id=${row.getId()})}"><i class="fa-solid fa-file-pen"></i></a></td>
+        <td style="text-align: center"><a th:href="@{/{id}/delete(id=${row.getId()})}"><i class="fa-sharp fa-solid fa-trash"></i></a></td>
+        <td style="text-align: center"><a th:href="@{/{id}/view(id=${row.getId()})}"><i class="fa-solid fa-eye"></i></a></td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+
+
+</body>
+</html>

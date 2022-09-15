@@ -41,7 +41,7 @@ public class ProductController {
     }
     @PostMapping("/update")
     public String update(Product product) {
-        productService.update(product.getId(), product);
+        productService.update(product);
         return "redirect:/";
     }
     @GetMapping("/{id}/delete")

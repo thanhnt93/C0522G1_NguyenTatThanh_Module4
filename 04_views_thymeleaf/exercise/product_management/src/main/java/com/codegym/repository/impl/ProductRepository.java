@@ -38,8 +38,8 @@ public class ProductRepository implements IProductRepository {
     }
 
     @Override
-    public void update(int id, Product product) {
-        productMap.put(id, product);
+    public void update(Product product) {
+        productMap.put(product.getId(), product);
     }
 
     @Override

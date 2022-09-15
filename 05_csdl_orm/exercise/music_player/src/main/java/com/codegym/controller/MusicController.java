@@ -14,7 +14,7 @@ import javax.persistence.PersistenceContext;
 
 public class MusicController {
     @Autowired
-    IMusicService musicService;
+    private IMusicService musicService;
 
     @GetMapping("")
     public String showMusic(Model model) {
@@ -27,22 +27,26 @@ public class MusicController {
         model.addAttribute("createMusic", new Music());
         return "create";
     }
+
     @PostMapping("create")
-    public String create(Music music, Model model){
-      musicService.save(music);
-      return "redirect:/";
-    }
-    @GetMapping("/show-update/{id}")
-    public String showUpdate(@PathVariable int id, Model model){
-      model.addAttribute("updateMusic",musicService.findOne(id));
-        return "update";
-    }
-    @PostMapping("/show-update/update")
-    public String update( Music music){
-        musicService.update( music);
+    public String create(Music music, Model model) {
+        musicService.save(music);
         return "redirect:/";
     }
-//    @GetMapping("/delete/{id}")
+
+    @GetMapping("/show-update/{id}")
+    public String showUpdate(@PathVariable int id, Model model) {
+        model.addAttribute("updateMusic", musicService.findOne(id));
+        return "update";
+    }
+
+    @PostMapping("/show-update/update")
+    public String update(Music music) {
+        musicService.update(music);
+        return "redirect:/";
+    }
+
+    //    @GetMapping("/delete/{id}")
 //    private String delete(@PathVariable int id, Model model) {
 //        model.addAttribute("music", musicService.findOne(id));
 //        return "delete";
@@ -50,6 +54,7 @@ public class MusicController {
     @GetMapping("delete/{id}")
     public String delete(@PathVariable int id) {
         musicService.remove(id);
-       // redirect.addFlashAttribute("success", "Removed customer successfully!");
-        return "redirect:/";}
+        // redirect.addFlashAttribute("success", "Removed customer successfully!");
+        return "redirect:/";
+    }
 }

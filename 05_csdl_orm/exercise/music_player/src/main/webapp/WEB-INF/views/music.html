@@ -5,6 +5,11 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <link rel="stylesheet" href="../../../bootstrap-5.0.2-dist/css/bootstrap.css">
+
     <style>
         body {
             background-image: url("https://salt.tikicdn.com/ts/product/64/93/6f/c8053c849a71a0e69c43d937d99666e3.jpg");
@@ -28,13 +33,13 @@
     </tr>
 
     <tr th:each="item:${musicList}">
-        <td th:text="${item.getId()}"></td>
-        <td th:text="${item.getNameMusic()}"></td>
-        <td th:text="${item.getAuthor()}"></td>
-        <td th:text="${item.getTypeOfMusic()}"></td>
-        <td th:text="${item.getLink()}"></td>
-        <td><a th:href="@{/show-update/{id} (id = ${item.getId()})}">edit</a></td>
-        <td><a th:href="@{/delete/{id} (id = ${item.getId()})}">delete</a></td>
+        <td th:text="${item.id}"></td>
+        <td th:text="${item.nameMusic}"></td>
+        <td th:text="${item.author}"></td>
+        <td th:text="${item.typeOfMusic}"></td>
+        <td><a th:href="${item.link}" th:text="${item.link}"></a></td>
+        <td><a th:href="@{/show-update/{id} (id = ${item.id})}"><i class="fa-solid fa-file-pen"></i></a></td>
+        <td><a th:href="@{/delete/{id} (id = ${item.id})}"><i class="fa-sharp fa-solid fa-trash"></i></a></td>
     </tr>
     </th:Each>
 </table>

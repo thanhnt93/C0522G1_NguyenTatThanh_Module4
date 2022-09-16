@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.persistence.PersistenceContext;
 
 @Controller
-
+@RequestMapping(value = "",produces = "text/html; charset = utf-8")
 public class MusicController {
     @Autowired
     private IMusicService musicService;

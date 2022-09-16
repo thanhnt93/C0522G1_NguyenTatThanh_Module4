@@ -3,17 +3,16 @@ package com.codegym.repository;
 import com.codegym.model.Music;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
-@Repository
+
 @Transactional
+@Repository
 public class MusicRepository implements IMusicRepository {
     @PersistenceContext
     private EntityManager entityManager;

@@ -4,26 +4,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
-
 import javax.persistence.Id;
 
 @Entity
+@Getter @Setter
 public class Product {
     @Id
-    @Getter
-    @Setter
     private int id;
 
-    @Getter
-    @Setter
     private String name;
 
-    @Getter
-    @Setter
     private double price;
 
-    @Getter
-    @Setter
     private String producer;
 
     public Product() {

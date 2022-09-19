@@ -1,4 +1,4 @@
-package com.codegym.repository.impl;
+package com.codegym.repository;
 
 import com.codegym.model.Blog;
 import org.springframework.data.domain.Page;

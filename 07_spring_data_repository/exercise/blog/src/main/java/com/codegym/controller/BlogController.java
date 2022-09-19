@@ -29,11 +29,10 @@ public class BlogController {
 //    }
     @GetMapping("/list")
     public String home(@PageableDefault(value = 5, sort = "day", direction = Sort.Direction.DESC) Pageable pageable, @RequestParam(defaultValue = "") String author ,
-                       Model model, RedirectAttributes redirect) {
-        redirect.addFlashAttribute("success", "Removed blog successfully!");
+                       Model model) {
         model.addAttribute("blogList", blogService.findByName(author,pageable));
         model.addAttribute("author",author);
-        return "index";
+        return "blog/index";
     }
 
     @GetMapping("/create")
@@ -41,12 +40,13 @@ public class BlogController {
         model.addAttribute("categoryList", categoryService.findAll());
         model.addAttribute("blog", new Blog());
 
-        return "create";
+        return "blog/create";
     }
 
     @PostMapping("/save")
-    public String save(Blog blog) {
+    public String save(Blog blog, RedirectAttributes redirectAttributes) {
         blogService.save(blog);
+        redirectAttributes.addFlashAttribute("mess", "Thêm mới thành công!");
         return "redirect:/list";
     }
 
@@ -54,12 +54,13 @@ public class BlogController {
     public String edit(@PathVariable int id, Model model) {
         model.addAttribute("categoryList", categoryService.findAll());
         model.addAttribute("blog", blogService.findById(id));
-        return "edit";
+        return "blog/edit";
     }
 
     @PostMapping("/update")
-    public String update(Blog blog) {
+    public String update(Blog blog, RedirectAttributes redirectAttributes) {
         blogService.update(blog);
+        redirectAttributes.addFlashAttribute("mess", "Cập nhập Blog thành công!");
         return "redirect:/list";
     }
 
@@ -68,13 +69,13 @@ public class BlogController {
         model.addAttribute("categoryList", categoryService.findAll());
         Optional<Blog> blog = blogService.findById(id);
         model.addAttribute("blog", blog);
-        return "remove";
+        return "blog/remove";
     }
 
     @PostMapping("/delete")
-    public String delete(Blog blog, RedirectAttributes redirect) {
+    public String delete(Blog blog, RedirectAttributes redirectAttributes) {
         blogService.remove(blog.getId());
-        redirect.addFlashAttribute("success", "Removed blog successfully!");
+        redirectAttributes.addFlashAttribute("mess", "Xóa Blog thành công!");
         return "redirect:/list";
     }
 
@@ -82,7 +83,7 @@ public class BlogController {
     public String view(@PathVariable int id, Model model) {
         model.addAttribute("categoryList", categoryService.findAll());
         model.addAttribute("blog", blogService.findById(id));
-        return "view";
+        return "blog/view";
     }
 
 

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="blog/layout :: head"></head>
+<head>
+    <style>
+        th {
+            text-align: center;
+        }
+
+        td {
+            text-align: center;
+        }
+
+        body {
+            background-image: url("https://salt.tikicdn.com/ts/product/64/93/6f/c8053c849a71a0e69c43d937d99666e3.jpg");
+            font-family: Arial, sans-serif;
+
+        }
+
+        a {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <h3 style="text-align: center; font-family: Comic Sans MS, Lucida Sans Unicode, sans-serif;">DANH SÁCH BLOG</h3>
+    <div class="row container-fluid" style="transform: translateY(-15px)">
+        <div class="col-lg-9">
+            <a th:href="@{/create}">
+                <button class="btn btn-info">
+                    Thêm mới blog
+                </button>
+            </a>
+            <a th:href="@{/category}">
+                <button class="btn btn-info">
+                    Chuyển sang danh sách Category
+                </button>
+            </a>
+        </div>
+        <div class="col-lg-3">
+            <form class="d-flex" th:action="@{list}" method="get">
+
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="author"
+                       style="width: 300px">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="notify">
+        <div th:if="${mess}">
+            <span th:text="${mess}"></span>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+
+        <tr>
+            <th>#</th>
+            <th>Tác giả</th>
+            <th>Trạng thái</th>
+            <th>Thể loại</th>
+            <th>Ngày ra mắt</th>
+            <th>Chỉnh sửa</th>
+            <th>Xóa</th>
+            <th>Xem</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row, status : ${blogList}">
+            <td th:text="${blogList.number * 5 + status.count}"></td>
+            <!--        <td th:text="${row.id}"></td>-->
+            <td th:text="${row.author}"></td>
+            <td th:text="${row.status}"></td>
+            <td th:text="${row.category.name}"></td>
+            <td th:text="${row.day}"></td>
+            <td><a th:href="@{/{id}/edit(id=${row.id})}"><i class="fa-solid fa-file-pen"></i></a></td>
+            <td><a th:href="@{/{id}/delete(id=${row.id})}"><i class="fa-sharp fa-solid fa-trash"></i></a></td>
+            <td><a th:href="@{/{id}/view(id=${row.id})}"><i class="fa-solid fa-eye"></i></a></td>
+
+        </tr>
+        </tbody>
+
+    </table>
+    <!--<div>-->
+    <!--    <a th:href="@{'/list'(page=${blogList.number - 1},author=${author})}" th:if="${blogList.hasPrevious()}"><i class="fa-solid fa-arrow-left"></i></a>-->
+    <!--    <span th:text="${blogList.number + 1}"></span>/<span th:text="${blogList.totalPages}"></span>-->
+    <!--    <a th:href="@{'/list'(page=${blogList.number + 1},author=${author})}" th:if="${blogList.hasNext()}">-->
+    <!--        <i class="fa-solid fa-arrow-right"></i></a>-->
+    <!--</div>-->
+    <div class="row">
+        <div class="col-lg-10"></div>
+        <div class="col-lg-2">
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{'/list'(page=${blogList.number - 1},author=${author})}"
+                           th:if="${blogList.hasPrevious()}">Previous</a>
+                    </li>
+
+                    <li class="page-item active" aria-current="page">
+                        <span class="page-link" th:text="${blogList.number + 1}"></span>
+                    </li>
+
+                    <li class="page-item active" aria-current="page">
+                        <span class="page-link">/</span>
+                    </li>
+
+                    <li class="page-item active" aria-current="page">
+                        <span class="page-link" th:text="${blogList.totalPages}"></span>
+                    </li>
+
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{'/list'(page=${blogList.number + 1},author=${author})}"
+                           th:if="${blogList.hasNext()}">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <footer th:replace="blog/layout :: footer"></footer>
+</div>
+</body>
+</html>

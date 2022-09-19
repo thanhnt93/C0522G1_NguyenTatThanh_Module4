@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="category/layout :: head"></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        th {
+            text-align: center;
+        }
+
+        td {
+            text-align: center;
+        }
+
+        body {
+            background-image: url("https://salt.tikicdn.com/ts/product/64/93/6f/c8053c849a71a0e69c43d937d99666e3.jpg");
+            font-family: Arial, sans-serif;
+
+        }
+
+        a{
+            color: black;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <h3 style="text-align: center; font-family: Comic Sans MS, Lucida Sans Unicode, sans-serif;">DANH SÁCH CATEGORY</h3>
+    <div class="col-lg-9">
+        <a th:href="@{/category/add}">
+            <button class="btn btn-info">
+                Thêm mới Category
+            </button>
+        </a>
+        <a th:href="@{/list}">
+            <button class="btn btn-info">
+                Chuyển sang danh sách Blog
+            </button>
+        </a>
+    </div>
+
+    <div class="notify">
+        <div th:if="${mess}">
+            <span th:text="${mess}"></span>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Thể loại</th>
+            <th>Chỉnh sửa</th>
+            <th>Xóa</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="category, status : ${categoryList}">
+            <td th:text="${status.count}"></td>
+            <td th:text="${category.name}"></td>
+            <td><a th:href="@{/category/edit/__${category.id}__}"><i class="fa-solid fa-file-pen"></i></a></td>
+            <td><a th:href="@{/category/delete/__${category.id}__}"><i class="fa-sharp fa-solid fa-trash"></i></a></td>
+        </tr>
+        </tbody>
+    </table>
+    <footer th:replace="category/layout :: footer"></footer>
+</div>
+</body>
+</html>

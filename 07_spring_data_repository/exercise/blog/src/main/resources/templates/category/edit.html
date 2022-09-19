@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="category/layout :: head"></head>
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h3>Chỉnh sửa Category</h3>
+<p style="transform: translateX(10px)">
+  <a th:href="@{/category}">
+    <button class="btn btn-info">
+      Về trang danh sách category
+    </button>
+  </a>
+</p>
+
+<form action="/category/update" method="post" th:object="${category}">
+  <table>
+    <tr>
+      <td><input type="hidden" th:field="*{id}"/></td>
+    </tr>
+
+    <tr>
+      <td>Thể loại:</td>
+      <td><input type="text" th:field="*{name}"/></td>
+    </tr>
+  </table>
+
+  <button type="submit" style="transform: translateX(10px)">Save</button>
+</form>
+<footer th:replace="category/layout :: footer"></footer>
+</body>
+</html>

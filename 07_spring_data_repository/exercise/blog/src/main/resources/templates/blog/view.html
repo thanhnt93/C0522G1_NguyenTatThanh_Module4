@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/layout :: head"></head>
+<head th:replace="blog/layout :: head"></head>
 <body>
-<h3>Xóa Blog</h3>
+<h3>Xem Blog</h3>
+
 <p style="transform: translateX(10px)">
     <a th:href="@{/list}">
         <button class="btn btn-info">
@@ -11,7 +12,7 @@
     </a>
 </p>
 <div id="form">
-    <form th:action="@{/delete}" th:object="${blog}"
+    <form th:action="@{/view}" th:object="${blog}"
           method="POST" novalidate="novalidate">
         <input type="hidden" th:field="*{id}"/>
         <div>
@@ -33,10 +34,11 @@
             <label>Ngày ra mắt</label>
             <input type="text" th:field="*{day}" style="width: 100%"/>
         </div>
-        <br>
-        <input type="submit" value="Xóa"/>
+
     </form>
 </div>
-<footer th:replace="/layout :: footer"></footer>
+
+<footer th:replace="blog/layout :: footer"></footer>
 </body>
 </html>
+

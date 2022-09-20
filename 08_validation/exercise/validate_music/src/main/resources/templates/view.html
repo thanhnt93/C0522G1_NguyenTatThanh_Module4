@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head"></head>
+<body>
+<h3>Xem Music</h3>
+<p style="transform: translateX(10px)">
+    <a th:href="@{/}">
+        <button class="btn btn-info">
+            Về trang danh sách music
+        </button>
+    </a>
+</p>
+<div id="form">
+
+    <form action="#"  th:object="${music}"
+          novalidate="novalidate">
+        <input type="hidden" th:field="*{id}"/>
+        <div>
+            <label>Tên bài hát</label>
+            <input type="text" th:field="*{nameMusic}"/>
+        </div>
+        <div>
+            <label>Nghệ sĩ</label>
+            <input type="email" th:field="*{author}"/>
+        </div>
+        <div>
+            <label>Thể loại nhạc</label>
+            <input type="text" th:field="*{typeOfMusic}"/>
+        </div>
+        <div>
+            <label>Đường dẫn</label>
+            <input type="text" th:field="*{link}"/>
+        </div>
+
+    </form>
+</div>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
+

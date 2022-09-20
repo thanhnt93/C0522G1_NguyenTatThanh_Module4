@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head"></head>
+<body>
+<h3>Thêm Music</h3>
+<p style="transform: translateX(10px)">
+    <a th:href="@{/}">
+        <button class="btn btn-info">
+            Về trang danh sách music
+        </button>
+    </a>
+</p>
+
+<div id="form">
+    <form th:action="@{/save}" th:object="${musicDto}"
+          method="POST" novalidate="novalidate">
+        <input type="hidden" th:field="*{id}"/>
+        <div>
+            <label>Tên bài hát</label>
+            <input type="text" th:field="*{nameMusic}"/>
+            <span style="color: red" th:if="${#fields.hasErrors('nameMusic')}" th:errors="*{nameMusic}"></span>
+        </div>
+        <div>
+            <label>Nghệ sĩ</label>
+            <input type="text" th:field="*{author}"/>
+            <span style="color: red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
+        </div>
+        <div>
+            <label>Thể loại nhạc</label>
+            <input type="text" th:field="*{typeOfMusic}"/>
+            <span style="color: red" th:if="${#fields.hasErrors('typeOfMusic')}" th:errors="*{typeOfMusic}"></span>
+        </div>
+        <div>
+            <label>Đường dẫn</label>
+            <input type="text" th:field="*{link}"/>
+            <span style="color: red" th:if="${#fields.hasErrors('link')}" th:errors="*{link}"></span>
+        </div>
+        <input type="submit" value="Lưu"/>
+    </form>
+</div>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

@@ -29,7 +29,7 @@ public class UserDto implements Validator {
     private String age;
 
     @NotBlank(message = "Email không được để trống")
-    @Pattern(regexp = "^[a-z]+([\\_\\.]?[a-z\\d]+)*@[a-z]{3,7}\\.[a-z]{2,3}$", message = "Sai quy tắc đặt tên mail example@xxx.xxx")
+    @Email(message = "Sai quy tắc đặt tên mail example@xxx.xxx")
     private String email;
 
     public UserDto() {

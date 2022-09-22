@@ -1,9 +1,21 @@
 package com.codegym.model;
 
+import com.codegym.dto.BlogDto;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+
+@NamedNativeQuery(name = "Blog.findBlogDtoById",
+        query = "select * from Blog where id = :id",
+        resultSetMapping = "Mapping.PlayerNameDto")
+@SqlResultSetMapping(name = "Mapping.PlayerNameDto",
+        classes = @ConstructorResult(targetClass = BlogDto.class,
+                columns = {@ColumnResult(name = "author"),
+                        @ColumnResult(name = "status"),
+                        @ColumnResult(name = "category"),
+                        @ColumnResult(name = "day")
+                }))
 
 @Entity
 @Getter

@@ -43,6 +43,14 @@ public class BlogController {
         return "blog/create";
     }
 
+    @GetMapping("/create1")
+    public String create1(Model model) {
+        model.addAttribute("categoryList", categoryService.findAll());
+        model.addAttribute("blog", new Blog());
+
+        return "blog/create";
+    }
+
     @PostMapping("/save")
     public String save(Blog blog, RedirectAttributes redirectAttributes) {
         blogService.save(blog);
@@ -86,5 +94,16 @@ public class BlogController {
         return "blog/view";
     }
 
+//    @GetMapping("")
+//    public String showList(@PageableDefault(value = 5, sort = "date_create", direction = Sort.Direction.DESC)
+//                                   Pageable pageable, @RequestParam(value = "search", defaultValue = "")
+//                                   String search, Model model) {
+//
+//        model.addAttribute("blogs", blogService.searchByAuthor(search, pageable));
+//        model.addAttribute("categorys", categoryService.findAll());
+//        model.addAttribute("search", search);
+//
+//        return "/blog/listdto";
+//    }
 
 }

@@ -1,5 +1,6 @@
 package com.codegym.service.impl;
 
+import com.codegym.dto.BlogDto;
 import com.codegym.model.Blog;
 import com.codegym.repository.IBlogRepository;
 import com.codegym.service.IBlogService;
@@ -51,4 +52,8 @@ public class BlogService implements IBlogService {
         return blogRepository.findAll(pageable);
     }
 
+    @Override
+    public List<BlogDto> searchByAuthor(String name, Pageable pageable) {
+        return blogRepository.searchByAuthor();
+    }
 }

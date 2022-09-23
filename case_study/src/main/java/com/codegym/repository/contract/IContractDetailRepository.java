@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface IContractDetailRepository extends JpaRepository<ContractDetail, Integer> {
 
-    @Query(value = "select * from contract_detail where contract_id = :id", nativeQuery = true)
+    @Query(value = "select * from contract_detail where contract_id = %:id%", nativeQuery = true)
     List<ContractDetail> getContractDetail(@Param("id") Integer id);
 
 }

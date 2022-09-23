@@ -38,7 +38,7 @@ public class CustomerController {
     @GetMapping("")
     public String customerList(@PageableDefault(value = 5) Pageable pageable, Model model,
                                @RequestParam(defaultValue = "") String name) {
-        model.addAttribute("customerList", customerService.findAll(pageable,name));
+        model.addAttribute("customerList", customerService.findAll(pageable, name));
         return "customer/index";
     }
 
@@ -61,14 +61,16 @@ public class CustomerController {
         redirectAttributes.addFlashAttribute("success", "Thêm mới khách hàng thành công!");
         return "redirect:/customer";
     }
+
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable int id, Model model) {
         model.addAttribute("customerDto", customerService.findById(id));
         model.addAttribute("customerTypeList", customerTypeService.findAll());
         return "/customer/edit";
     }
+
     @PostMapping("/update")
-    public String update(@Validated @ModelAttribute("customerDto") CustomerDto customerDto, BindingResult bindingResult, RedirectAttributes redirect , Model model) {
+    public String update(@Validated @ModelAttribute("customerDto") CustomerDto customerDto, BindingResult bindingResult, RedirectAttributes redirect, Model model) {
         if (bindingResult.hasFieldErrors()) {
             model.addAttribute("customerTypeList", customerTypeService.findAll());
             return "/customer/edit";
@@ -80,17 +82,19 @@ public class CustomerController {
         redirect.addFlashAttribute("success", "Cập nhập khách hàng thành công!");
         return "redirect:/customer";
     }
+
     @GetMapping("/{id}/delete")
     public String delete(@PathVariable int id, Model model) {
         model.addAttribute("customer", customerService.findById(id));
         model.addAttribute("customerTypeList", customerTypeService.findAll());
         return "/customer/delete";
     }
+
     @PostMapping("/delete")
     public String delete(@RequestParam int id, RedirectAttributes redirect) {
         Customer customer = customerService.findById(id).get();
         List<Contract> contract = contractService.findByCustomerId(id);
-        for (int i=0;i<contract.size();i++){
+        for (int i = 0; i < contract.size(); i++) {
             List<ContractDetail> contractDetailList = contractDetailService.getContractDetail(contract.get(i).getId());
             for (int j = 0; j < contractDetailList.size(); j++) {
                 contractDetailService.remove(contractDetailList.get(j));

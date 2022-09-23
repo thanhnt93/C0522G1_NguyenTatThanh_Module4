@@ -18,8 +18,8 @@
             </button>
         </a>
 
-        <form class="d-flex my-2" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <form th:action="@{search}" class="d-flex my-2" role="search" method="get">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
             <button class="btn btn-outline-success" type="submit">
                 <i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
@@ -121,9 +121,9 @@
     </tbody>
 </table>
 <div>
-    <a th:href="@{'/employee'(page=${employeeList.number - 1})}" th:if="${employeeList.hasPrevious()}">Previous</a>
+    <a th:href="@{'/search/employee'(page=${employeeList.number - 1})}" th:if="${employeeList.hasPrevious()}">Previous</a>
     <span th:text="${employeeList.number + 1}"></span>/<span th:text="${employeeList.totalPages}"></span>
-    <a th:href="@{'/employee'(page=${employeeList.number + 1})}" th:if="${employeeList.hasNext()}">Next</a>
+    <a th:href="@{'/search/employee'(page=${employeeList.number + 1})}" th:if="${employeeList.hasNext()}">Next</a>
 </div>
 <footer th:replace="employee/layout :: footer"></footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

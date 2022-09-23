@@ -11,12 +11,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public interface IEmployeeRepository extends JpaRepository<Employee,Integer> {
-    @Query(value = "select * from employee where name like :search", nativeQuery= true)
-    Page<Employee> findByNameContaining(@Param("search") String name, Pageable pageable);
+//    @Query(value = "select * from employee where name like :search", nativeQuery= true)
+//    Page<Employee> findByNameContaining(@Param("search") String name, Pageable pageable);
 
 
     @Query(value = "select * from employee where is_delete = 0", nativeQuery= true)
     Page<Employee> findAll2(Pageable pageable);
+
+    @Query(value = "select * from employee where is_delete = 0 and name like %:name%", nativeQuery = true)
+    Page<Employee> findAllByName(Pageable pageable,@Param("name") String name);
 
 
     @Modifying

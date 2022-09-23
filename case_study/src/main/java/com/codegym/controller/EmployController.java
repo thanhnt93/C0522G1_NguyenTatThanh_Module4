@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@RequestMapping("/employee")
 public class EmployController {
     @Autowired
     private IEmployeeService employeeService;
@@ -28,13 +29,15 @@ public class EmployController {
     @Autowired
     private IPositionService positionService;
 
-    @GetMapping("/employee")
-    public String customerList(@PageableDefault(value = 5) Pageable pageable, Model model) {
-        model.addAttribute("employeeList", employeeService.findAll2(pageable));
+    @GetMapping("")
+    public String employeeList(@PageableDefault(value = 5) Pageable pageable, Model model,
+                               @RequestParam(defaultValue = "") String search) {
+        model.addAttribute("employeeList", employeeService.findAllByName(pageable, search));
+        model.addAttribute("search", search);
         return "employee/index";
     }
 
-    @GetMapping("/employee/create")
+    @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("employeeDto", new EmployeeDto());
         model.addAttribute("positionList", positionService.findAll());
@@ -43,7 +46,7 @@ public class EmployController {
         return "employee/create";
     }
 
-    @PostMapping("/employee/save")
+    @PostMapping("/save")
     public String save(@Validated @ModelAttribute("employeeDto") EmployeeDto employeeDto, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasFieldErrors()) {
             model.addAttribute("positionList", positionService.findAll());
@@ -58,7 +61,7 @@ public class EmployController {
         return "redirect:/employee";
     }
 
-    @GetMapping("/employee/{id}/edit")
+    @GetMapping("/{id}/edit")
     public String edit(@PathVariable int id, Model model) {
         model.addAttribute("employeeDto", employeeService.findById(id));
         model.addAttribute("positionList", positionService.findAll());
@@ -67,7 +70,7 @@ public class EmployController {
         return "/employee/edit";
     }
 
-    @PostMapping("/employee/update")
+    @PostMapping("/update")
     public String update(@Validated @ModelAttribute("employeeDto") EmployeeDto employeeDto, BindingResult bindingResult, RedirectAttributes redirect, Model model) {
         if (bindingResult.hasFieldErrors()) {
             model.addAttribute("positionList", positionService.findAll());

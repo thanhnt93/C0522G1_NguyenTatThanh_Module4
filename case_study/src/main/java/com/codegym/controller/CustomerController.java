@@ -39,6 +39,7 @@ public class CustomerController {
     public String customerList(@PageableDefault(value = 5) Pageable pageable, Model model,
                                @RequestParam(defaultValue = "") String name) {
         model.addAttribute("customerList", customerService.findAll(pageable, name));
+        model.addAttribute("name", name);
         return "customer/index";
     }
 

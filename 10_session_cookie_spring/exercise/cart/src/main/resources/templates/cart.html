@@ -35,10 +35,10 @@
                         <th>Tên sản phẩm</th>
                         <th>Ảnh</th>
                         <th>Giá tiền</th>
+                        <th>Giảm</th>
                         <th>Số lượng</th>
+                        <th>Tăng</th>
                         <th>Tổng tiền</th>
-                        <th>Thêm</th>
-                        <th>Xóa</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -48,19 +48,20 @@
                             <img th:src="@{${productMap.key.image}}" style="width:70px; height: auto">
                         </td>
                         <td th:text="${productMap.key.price}">20</td>
-                        <td th:text="${productMap.value}">10</td>
-                        <td th:text="${productMap.key.price * productMap.value}"></td>
-
-                        <td style="text-align: center"><a th:href="@{/shop/add/__${productMap.key.id}__}"><i
-                                class="fa-solid fa-cart-plus"></i></a>
-                        </td>
                         <td style="text-align: center"><a th:href="@{/shop/delete/__${productMap.key.id}__}"><i
                                 class="fa-sharp fa-solid fa-cart-shopping"></i></a></td>
+                        <td style="text-align: center" th:text="${productMap.value}">10</td>
+                        <td style="text-align: center"><a th:href="@{/shop/add/__${productMap.key.id}__}"><i
+                                class="fa-solid fa-cart-plus"></i></a></td>
+                        <td th:text="${productMap.key.price * productMap.value}"></td>
+
 
                     </tr>
                     <hr style="border: black">
                     <tr>
                         <td><b>Tổng giá tiền</b></td>
+                        <td></td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>

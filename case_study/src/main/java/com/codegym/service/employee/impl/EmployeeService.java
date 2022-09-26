@@ -41,7 +41,7 @@ employeeRepository.save(employee);
 //    }
 
     @Override
-    public Page<Employee> findAllByName(Pageable pageable, String name) {
-        return employeeRepository.findAllByName(pageable, name);
+    public Page<Employee> findAllByName(Pageable pageable, String search) {
+        return employeeRepository.findAllByName(search, pageable);
     }
 }

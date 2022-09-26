@@ -37,9 +37,9 @@ public class CustomerController {
 
     @GetMapping("")
     public String customerList(@PageableDefault(value = 5) Pageable pageable, Model model,
-                               @RequestParam(defaultValue = "") String name) {
-        model.addAttribute("customerList", customerService.findAll(pageable, name));
-        model.addAttribute("name", name);
+                               @RequestParam(defaultValue = "") String search) {
+        model.addAttribute("customerList", customerService.findAll(pageable, search));
+        model.addAttribute("search", search);
         return "customer/index";
     }
 

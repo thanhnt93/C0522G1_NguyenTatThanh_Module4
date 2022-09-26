@@ -23,7 +23,7 @@ public class CartDto {
         }
     }
 
-    public void deleteProduct(ProductDto productDto) {
+    public void amountDecrease(ProductDto productDto) {
         if (productMap.containsKey(productDto)) {
             if (productMap.get(productDto) > 1) {
                 Integer currentValue = productMap.get(productDto);

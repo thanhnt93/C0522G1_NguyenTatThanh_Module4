@@ -53,7 +53,7 @@ public class ProductController {
         if (productOptional.isPresent()) {
             ProductDto productDto = new ProductDto();
             BeanUtils.copyProperties(productOptional.get(), productDto);
-            cartDto.deleteProduct(productDto);
+            cartDto.amountDecrease(productDto);
         }
         return "redirect:/cart";
     }

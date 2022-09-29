@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+</head>
+<body>
+<input type="text" id="inputSearch" name="search">
+<br>
+<br>
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Trạng thái</th>
+        <th>Tác giả</th>
+        <th>Ngảy ra mắt</th>
+    </tr>
+</table>
+<br>
+<button id="next">Loading....</button>
+<script src="/templates/jquery/jquery-3.5.1.min.js"></script>
+<script>
+    $(Document).ready(function () {
+        $.ajax({
+            url: "http://localhost:8080/blog/api/v1",
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                let str = [];
+                let x = 0;
+                if (data.length <= 3) {
+                    x = data.length;
+                } else {
+                    x = 3;
+                }
+                for (let i = 0; i < x; i++) {
+                    str.push("<tr>")
+                    str.push("<td>" + data[i].id + "</td>")
+                    str.push("<td>" + data[i].status + "</td>")
+                    str.push("<td>" + data[i].author + "</td>")
+                    str.push("<td>" + data[i].day + "</td>")
+                    str.push("</tr>")
+                }
+                $("table").append((str.join("")));
+            }
+        })
+
+        $("#inputSearch").keyup(function () {
+            let value = $(this).val();
+            $("table").empty();
+            $.ajax({
+                url: "http://localhost:8080/blog/api/v1/search?search=" + value,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    let str = [];
+                    str.push(`
+                            <tr>
+                               <th>ID</th>
+                               <th>Trạng thái</th>
+                               <th>Tác giả</th>
+                               <th>Ngảy ra mắt</th>
+                            </tr>
+                        `)
+                    for (let i = 0; i < data.length; i++) {
+                        str.push("<tr>")
+                        str.push("<td>" + data[i].id + "</td>")
+                        str.push("<td>" + data[i].status + "</td>")
+                        str.push("<td>" + data[i].type + "</td>")
+                        str.push("<td>" + data[i].day + "</td>")
+                        str.push("</tr>")
+                    }
+                    $("table").append((str.join("")));
+                }
+            })
+        })
+
+        $("#next").click(function () {
+            $("table").empty();
+            $.ajax({
+                url: "http://localhost:8080/blog/api/v1",
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    let str = [];
+                    str.push(`
+                   <tr style="background-color: forestgreen">
+                        <th>ID</th>
+                               <th>Trạng thái</th>
+                               <th>Tác giả</th>
+                               <th>Ngảy ra mắt</th>
+                     </tr>
+`)
+                    for (let i = 0; i < data.length; i++) {
+                        str.push("<tr>")
+                        str.push("<td>" + data[i].id + "</td>")
+                        str.push("<td>" + data[i].status + "</td>")
+                        str.push("<td>" + data[i].type + "</td>")
+                        str.push("<td>" + data[i].day + "</td>")
+                        str.push("</tr>")
+                    }
+                    $("table").append((str.join("")));
+                }
+            })
+        })
+    })
+
+
+</script>
+</body>
+</html>

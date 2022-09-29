@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="employee/layout :: head">
+<head th:replace="facility/layout :: head">
     <head>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
@@ -8,70 +8,72 @@
     </head>
 <body>
 <div th:replace="~{/home::header}"></div>
-<h2 class="text-center fw-bold">Danh sách nhân viên</h2>
+<h2 class="text-center fw-bold">Danh sách dịch vụ</h2>
 <nav class="navbar navbar-expand-lg py-0 my-0">
     <div class="container-fluid">
-        <a th:href="@{/employee/create}">
+        <a th:href="@{/facility/create}">
             <button class="btn btn-success btn-outline-secondary btn-sm">
                 <span class="fa-solid fa-person-circle-plus text-light h5 my-auto me-1"></span>
-                <span class="text-light">Thêm mới nhân viên</span>
+                <span class="text-light">Thêm mới dịch vụ</span>
             </button>
         </a>
 
-        <form th:action="@{employee}" class="d-flex my-2" role="search" method="get">
+        <form th:action="@{facility}" class="d-flex my-2" role="search" method="get">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
             <button class="btn btn-outline-success" type="submit">
                 <i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
     </div>
 </nav>
+
 <div class="notify">
     <div th:if="${success}">
         <span th:text="${success}"></span>
     </div>
 </div>
-<table id="employeeTable" class="table table-light table-striped table-bordered">
-    <thead class="table-dark text-light">
-    <tr>
-        <th>#</th>
-        <th>Tên nhân viên</th>
-        <th>Ngày sinh</th>
-        <th>CMND</th>
-        <!--        <th>Lương</th>-->
-        <th>Số điện thoại</th>
-        <th>Email</th>
-        <th>Địa chỉ</th>
-        <!--        <th>positionId</th>-->
-        <!--        <th>educationDegreeId</th>-->
-        <!--        <th>divisionId</th>-->
-        <th>Actions</th>
-        <th>Actions</th>
 
+<table id="employeeTable" class="table table-light table-striped table-bordered">
+    <thead>
+
+    <thead class="table-dark text-light">
+    <th>#</th>
+    <th>Tên dịch vụ</th>
+    <th>Diện tích sử dụng</th>
+    <th>Chi phí thuê</th>
+    <th>Số lượng</th>
+    <th>Tiêu chuẩn phòng</th>
+    <th>Mô tả</th>
+    <th>Diện tích hồ bơi</th>
+    <th>Số tầng</th>
+    <th>Dịch vụ miễn phí đi kèm</th>
+    <th>Kiểu thuê</th>
+    <th>Kiểu dịch vụ</th>
+    <th>Actions</th>
+    <th>Actions</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="row, status: ${employeeList}">
-        <!--        <td th:text="${row.id}"></td>-->
-        <td th:text="${employeeList.number * 5 + status.count}"></td>
+    <tr th:each="row : ${facilityList}">
+        <td th:text="${row.id}"></td>
         <td th:text="${row.name}"></td>
-        <td th:text="${row.birthday}"></td>
-        <td th:text="${row.idCard}"></td>
-        <!--        <td th:text="${row.salary}"></td>-->
-        <td th:text="${row.numberPhone}"></td>
-        <td th:text="${row.email}"></td>
-        <td th:text="${row.address}"></td>
-        <!--        <td th:text="${row.position.name}"></td>-->
-        <!--        <td th:text="${row.educationDegree.name}"></td>-->
-        <!--        <td th:text="${row.division.name}"></td>-->
-
+        <td th:text="${row.area}"></td>
+        <td th:text="${row.cost}"></td>
+        <td th:text="${row.maxPeople}"></td>
+        <td th:text="${row.standardRoom}"></td>
+        <td th:text="${row.descriptionOtherConvenience}"></td>
+        <td th:text="${row.poolArea}"></td>
+        <td th:text="${row.numberOfFloors}"></td>
+        <td th:text="${row.facilityFree}"></td>
+        <td th:text="${row.rentType.name}"></td>
+        <td th:text="${row.facilityType.name}"></td>
         <td>
-            <a th:href="@{/employee/{id}/edit(id=${row.id})}">
+            <a th:href="@{facility/{id}/edit(id=${row.id})}">
                 <button class="btn btn-primary btn-outline-secondary btn-sm">
                     <span class="fa-solid fa-user-pen text-light h6 m-auto px-2"></span>
                 </button>
             </a>
         </td>
-
+        <!--        <td><a th:href="@{/{id}/delete(id=${row.getId()})}">delete</a></td>-->
         <td>
             <a th:href="'#a' + ${row.id}" data-bs-toggle="modal">
                 <button class="btn btn-danger btn-outline-secondary btn-sm">
@@ -82,11 +84,11 @@
             <div class="modal fade" th:id="a + ${row.id}" data-bs-backdrop="static" data-bs-keyboard="false"
                  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <form action="#" th:action="@{/employee/delete}"
+                    <form action="#" th:action="@{/facility/delete}"
                           method="POST">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Thông báo !</h5>
+                                <h5 class="modal-title" id="staticBackdropLabel">Thông báo</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                             </div>
@@ -96,6 +98,7 @@
                                 <input type="hidden" th:value="${row.id}" name="id">
                                 ?
                             </div>
+
                             <div class="row">
                                 <div class="col-lg-7">
                                     <button type="submit" class="btn btn-outline-success"
@@ -108,8 +111,6 @@
                                     </button>
                                 </div>
                             </div>
-
-
                         </div>
                     </form>
                 </div>
@@ -121,14 +122,10 @@
     </tbody>
 </table>
 <div>
-    <a th:href="@{'/employee'(page=${employeeList.number - 1},search=${search})}" th:if="${employeeList.hasPrevious()}">Previous</a>
-    <span th:text="${employeeList.number + 1}"></span>/<span th:text="${employeeList.totalPages}"></span>
-    <a th:href="@{'/employee'(page=${employeeList.number + 1},search=${search})}" th:if="${employeeList.hasNext()}">Next</a>
+    <a th:href="@{'/facility'(page=${facilityList.number - 1})}" th:if="${facilityList.hasPrevious()}">Previous</a>
+    <span th:text="${facilityList.number + 1}"></span>/<span th:text="${facilityList.totalPages}"></span>
+    <a th:href="@{'/facility'(page=${facilityList.number + 1})}" th:if="${facilityList.hasNext()}">Next</a>
 </div>
-<footer th:replace="employee/layout :: footer"></footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
 
 
 </body>

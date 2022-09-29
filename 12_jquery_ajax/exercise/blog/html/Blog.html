@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        body {
+            background-image: url("https://i.pinimg.com/originals/86/41/6d/86416d71cbd1e608a5304bb92fc235ea.png");
+        }
+
+        table {
+            border: solid 3px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h2 class="text-center fw-bold">Danh sách Blog</h2>
+
+<form class="d-flex my-2" role="search">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" id="inputSearch" style="width: 500px; transform: translateX(500px)">
+</form>
+<br>
+<br>
+
+<table id="employeeTable" class="table table-light table-striped table-bordered">
+    <tr class="table-dark text-light">
+        <th>ID</th>
+        <th>Trạng thái</th>
+        <th>Tác giả</th>
+        <th>Ngày ra mắt</th>
+    </tr>
+</table>
+<br>
+<button id="next">Tải thêm...</button>
+<script src="jquery-3.5.1.min.js"></script>
+<script>
+    $(Document).ready(function () {
+        $.ajax({
+            url: "http://localhost:8080/blog/api/v1",
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                let str = [];
+                let x = 0;
+                if (data.length <= 3) {
+                    x = data.length;
+                } else {
+                    x = 3;
+                }
+                for (let i = 0; i < x; i++) {
+                    str.push("<tr>")
+                    str.push("<td>" + data[i].id + "</td>")
+                    str.push("<td>" + data[i].status + "</td>")
+                    str.push("<td>" + data[i].author + "</td>")
+                    str.push("<td>" + data[i].day + "</td>")
+                    str.push("</tr>")
+                }
+                $("table").append((str.join("")));
+            }
+        })
+
+        $("#inputSearch").keyup(function () {
+            let value = $(this).val();
+            $("table").empty();
+            $.ajax({
+                url: "http://localhost:8080/blog/api/v1/search?search=" + value,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    let str = [];
+                    str.push(`
+                            <tr class="table-dark text-light">
+                                <th>ID</th>
+                                <th>Trạng thái</th>
+                                <th>Tác giả</th>
+                                <th>Ngày ra mắt</th>
+                            </tr>
+                        `)
+                    for (let i = 0; i < data.length; i++) {
+                        str.push("<tr>")
+                        str.push("<td>" + data[i].id + "</td>")
+                        str.push("<td>" + data[i].status + "</td>")
+                        str.push("<td>" + data[i].author + "</td>")
+                        str.push("<td>" + data[i].day + "</td>")
+                        str.push("</tr>")
+                    }
+                    $("table").append((str.join("")));
+                }
+            })
+        })
+
+        $("#next").click(function () {
+            $("table").empty();
+            $.ajax({
+                url: "http://localhost:8080/blog/api/v1",
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    let str = [];
+                    str.push(`
+                   <tr>
+                        <th class="table-dark text-light">ID</th>
+                        <th>Trạng thái</th>
+                        <th>Tác giả</th>
+                        <th>Ngày ra mắt</th>
+                    </tr>
+`)
+                    for (let i = 0; i < data.length; i++) {
+                        str.push("<tr>")
+                        str.push("<td>" + data[i].id + "</td>")
+                        str.push("<td>" + data[i].status + "</td>")
+                        str.push("<td>" + data[i].author + "</td>")
+                        str.push("<td>" + data[i].day + "</td>")
+                        str.push("</tr>")
+                    }
+                    $("table").append((str.join("")));
+                }
+            })
+        })
+    })
+
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

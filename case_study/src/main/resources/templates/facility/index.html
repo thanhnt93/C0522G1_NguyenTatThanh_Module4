@@ -126,7 +126,7 @@
     <span th:text="${facilityList.number + 1}"></span>/<span th:text="${facilityList.totalPages}"></span>
     <a th:href="@{'/facility'(page=${facilityList.number + 1})}" th:if="${facilityList.hasNext()}">Next</a>
 </div>
-
+<th:block th:replace="home::jscommon"></th:block>
 
 </body>
 </html>

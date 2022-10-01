@@ -11,8 +11,10 @@ import java.util.List;
 @Setter
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String userName;
-    private String userPassword;
+    private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
@@ -24,9 +26,5 @@ public class User {
     public User() {
     }
 
-    public User(String userName, String userPassword, List<Role> roles) {
-        this.userName = userName;
-        this.userPassword = userPassword;
-        this.roles = roles;
-    }
+
 }

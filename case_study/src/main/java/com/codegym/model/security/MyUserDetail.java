@@ -19,14 +19,14 @@ public class MyUserDetail implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
         for (Role role : user.getRoles()) {
-            grantedAuthorityList.add(new SimpleGrantedAuthority(role.getRoleName()));
+            grantedAuthorityList.add(new SimpleGrantedAuthority(role.getName()));
         }
         return grantedAuthorityList;
     }
 
     @Override
     public String getPassword() {
-        return user.getUserPassword();
+        return user.getPassword();
     }
 
     @Override

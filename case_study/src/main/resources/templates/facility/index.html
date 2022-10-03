@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="facility/layout :: head">
-    <head>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-              crossorigin="anonymous">
-    </head>
 <body>
 <div th:replace="~{/home::header}"></div>
 <h2 class="text-center fw-bold">Danh sách dịch vụ</h2>
@@ -38,31 +33,31 @@
     <thead class="table-dark text-light">
     <th>#</th>
     <th>Tên dịch vụ</th>
-    <th>Diện tích sử dụng</th>
+<!--    <th>Diện tích sử dụng</th>-->
     <th>Chi phí thuê</th>
     <th>Số lượng</th>
     <th>Tiêu chuẩn phòng</th>
-    <th>Mô tả</th>
-    <th>Diện tích hồ bơi</th>
-    <th>Số tầng</th>
+<!--    <th>Mô tả</th>-->
+<!--    <th>Diện tích hồ bơi</th>-->
+<!--    <th>Số tầng</th>-->
     <th>Dịch vụ miễn phí đi kèm</th>
     <th>Kiểu thuê</th>
     <th>Kiểu dịch vụ</th>
-    <th>Actions</th>
-    <th>Actions</th>
+    <th>Chỉnh sửa</th>
+    <th>Xóa</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="row : ${facilityList}">
         <td th:text="${row.id}"></td>
         <td th:text="${row.name}"></td>
-        <td th:text="${row.area}"></td>
+<!--        <td th:text="${row.area}"></td>-->
         <td th:text="${row.cost}"></td>
         <td th:text="${row.maxPeople}"></td>
         <td th:text="${row.standardRoom}"></td>
-        <td th:text="${row.descriptionOtherConvenience}"></td>
-        <td th:text="${row.poolArea}"></td>
-        <td th:text="${row.numberOfFloors}"></td>
+<!--        <td th:text="${row.descriptionOtherConvenience}"></td>-->
+<!--        <td th:text="${row.poolArea}"></td>-->
+<!--        <td th:text="${row.numberOfFloors}"></td>-->
         <td th:text="${row.facilityFree}"></td>
         <td th:text="${row.rentType.name}"></td>
         <td th:text="${row.facilityType.name}"></td>
@@ -99,17 +94,9 @@
                                 ?
                             </div>
 
-                            <div class="row">
-                                <div class="col-lg-7">
-                                    <button type="submit" class="btn btn-outline-success"
-                                            style="width: 80px; transform: translateX(200px)">Có
-                                    </button>
-                                </div>
-                                <div class="col-lg-5">
-                                    <button type="button" class="btn btn-secondary center-pill" data-bs-dismiss="modal"
-                                            style="width: 80px; transform: translateX(40px)">Không
-                                    </button>
-                                </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary center-pill" data-bs-dismiss="modal">Đóng</button>
+                                <button type="submit" class="btn btn-outline-success">Xóa</button>
                             </div>
                         </div>
                     </form>
@@ -127,6 +114,7 @@
     <a th:href="@{'/facility'(page=${facilityList.number + 1})}" th:if="${facilityList.hasNext()}">Next</a>
 </div>
 <th:block th:replace="home::jscommon"></th:block>
+<footer th:replace="facility/layout :: footer"></footer>
 
 </body>
 </html>

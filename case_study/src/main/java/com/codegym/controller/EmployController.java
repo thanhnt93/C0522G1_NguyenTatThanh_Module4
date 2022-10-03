@@ -86,19 +86,19 @@ public class EmployController {
         return "redirect:/employee";
     }
 
-//    @GetMapping("/employee/{id}/delete")
-//    public String delete(@PathVariable int id, Model model) {
-//        model.addAttribute("employee", employeeService.findById(id));
-//        model.addAttribute("positionList", positionService.findAll());
-//        model.addAttribute("divisionList", divisionService.findAll());
-//        model.addAttribute("educationDegreeList", educationDegreeService.findAll());
-//        return "/employee/delete";
-//    }
+    @GetMapping("/{id}/delete")
+    public String delete(@PathVariable int id, Model model) {
+        model.addAttribute("employee", employeeService.findById(id));
+        model.addAttribute("positionList", positionService.findAll());
+        model.addAttribute("divisionList", divisionService.findAll());
+        model.addAttribute("educationDegreeList", educationDegreeService.findAll());
+        return "/employee/delete";
+    }
 
-//    @PostMapping("/employee/delete")
-//    public String delete(@RequestParam int id, RedirectAttributes redirect) {
-//        employeeService.removeVer2(id);
-//        redirect.addFlashAttribute("success", "Removed customer successfully!");
-//        return "redirect:/employee";
-//    }
+    @PostMapping("/delete")
+    public String delete(@RequestParam int id, RedirectAttributes redirect) {
+        employeeService.removeVer2(id);
+        redirect.addFlashAttribute("success", "Xóa nhân viên thành công!");
+        return "redirect:/employee";
+    }
 }

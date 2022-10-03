@@ -106,11 +106,4 @@ public class CustomerController {
         redirect.addFlashAttribute("success", "Xóa khách hàng thành công !");
         return "redirect:/customer";
     }
-
-//    @GetMapping("/search")
-//    public String search(@RequestParam String name, Pageable pageable, Model model) {
-//        model.addAttribute("customerList", customerService.findByNameContains(name, pageable));
-//
-//        return "customer/index";
-//    }
 }

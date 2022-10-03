@@ -47,7 +47,7 @@ public class FacilityController {
         Facility facility = new Facility();
         BeanUtils.copyProperties(facilityDto, facility);
         facilityService.save(facility);
-        redirectAttributes.addFlashAttribute("success", "Add Facility Successful!");
+        redirectAttributes.addFlashAttribute("success", "Thêm mới dịch vụ thành công!");
         return "redirect:/facility";
     }
 
@@ -70,7 +70,7 @@ public class FacilityController {
         Facility facility = new Facility();
         BeanUtils.copyProperties(facilityDto, facility);
         facilityService.save(facility);
-        redirect.addFlashAttribute("success", "Update facility successfully!");
+        redirect.addFlashAttribute("success", "Cập nhập dịch vụ thành công !");
         return "redirect:/facility";
     }
 
@@ -85,7 +85,7 @@ public class FacilityController {
     @PostMapping("/facility/delete")
     public String delete(@RequestParam int id, RedirectAttributes redirect) {
         facilityService.remove(id);
-        redirect.addFlashAttribute("success", "Removed facility successfully!");
+        redirect.addFlashAttribute("success", "Xóa dịch vụ thành công!");
         return "redirect:/facility";
     }
 }

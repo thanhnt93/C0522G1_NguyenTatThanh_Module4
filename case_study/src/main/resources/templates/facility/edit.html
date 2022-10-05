@@ -14,7 +14,7 @@
         <div class="mt-3 form-group">
             <label class="h6">Loại dịch vụ:</label>
             <div class="input-group">
-                <select class="form-control" th:field="*{facilityType}" onchange="facilitys(this.value)">
+                <select class="form-select" th:field="*{facilityType}" onchange="facilitys(this.value)">
                     <option th:each="item:${facilityTypeList}" th:text="${item.name}"
                             th:value="${item.id}"></option>
                 </select>
@@ -98,7 +98,7 @@
         <div class="mt-3 form-group">
             <label class="h6">Kiểu thuê:</label>
             <div class="input-group">
-                <select class="form-control" th:field="*{rentType}">
+                <select class="form-select" th:field="*{rentType}">
                     <option th:each="item : ${rentTypeList}" th:value="${item.id}" th:text="${item.name}"></option>
                 </select>
                 <span class="input-group-text"><i class="fa-solid fa-map"></i></span>

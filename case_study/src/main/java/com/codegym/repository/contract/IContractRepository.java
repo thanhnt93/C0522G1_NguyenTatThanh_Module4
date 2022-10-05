@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface IContractRepository extends JpaRepository<Contract, Integer> {
+
     @Query(value = "select * from contract where name like %:search%", nativeQuery = true)
     Page<Contract> findByNameContaining(@Param("search") String name, Pageable pageable);
 

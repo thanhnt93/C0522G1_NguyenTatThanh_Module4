@@ -82,7 +82,7 @@
         <div class="mt-3 form-group">
             <label class="h6">Loại khách hàng:</label>
             <div class="input-group">
-                <select th:field="*{customerType}" class="form-control">
+                <select th:field="*{customerType}" class="form-select">
                     <option th:each="item : ${customerTypeList}" th:value="${item.id}" th:text="${item.name}"></option>
                 </select>
                 <span class="input-group-text"><i class="fa-solid fa-ranking-star"></i></span>

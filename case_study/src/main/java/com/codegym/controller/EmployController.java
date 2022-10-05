@@ -32,6 +32,10 @@ public class EmployController {
     @GetMapping("")
     public String employeeList(@PageableDefault(value = 5) Pageable pageable, Model model,
                                @RequestParam(defaultValue = "") String search) {
+        model.addAttribute("employeeDto", new EmployeeDto());
+        model.addAttribute("positionList", positionService.findAll());
+        model.addAttribute("divisionList", divisionService.findAll());
+        model.addAttribute("educationDegreeList", educationDegreeService.findAll());
         model.addAttribute("employeeList", employeeService.findAllByName(pageable, search));
         model.addAttribute("search", search);
         return "employee/index";
@@ -49,6 +53,7 @@ public class EmployController {
     @PostMapping("/save")
     public String save(@Validated @ModelAttribute("employeeDto") EmployeeDto employeeDto, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("employeeDto", new EmployeeDto());
             model.addAttribute("positionList", positionService.findAll());
             model.addAttribute("divisionList", divisionService.findAll());
             model.addAttribute("educationDegreeList", educationDegreeService.findAll());

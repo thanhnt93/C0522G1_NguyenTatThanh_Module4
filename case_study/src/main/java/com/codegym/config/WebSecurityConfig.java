@@ -31,10 +31,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+//        http.csrf().disable()
+//                .formLogin()
+//                .defaultSuccessUrl("/")
+//                .and()
+//                .authorizeRequests().anyRequest().authenticated();
         http.csrf().disable()
                 .formLogin()
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/").permitAll()
                 .and()
-                .authorizeRequests().anyRequest().authenticated();
+                .authorizeRequests()
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+//                .antMatchers("/").permitAll()
+                .antMatchers("/customer/**", "/", "/facility/**").hasAnyRole("USER")
+                .antMatchers("/**").hasAnyRole("ADMIN")
+                .anyRequest().authenticated();
     }
 }

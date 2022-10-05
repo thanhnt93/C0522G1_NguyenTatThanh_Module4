@@ -6,12 +6,17 @@
 <h2 class="text-center fw-bold">Danh sách nhân viên</h2>
 <nav class="navbar navbar-expand-lg py-0 my-0">
     <div class="container-fluid">
-        <a th:href="@{/employee/create}">
-            <button class="btn btn-success btn-outline-secondary btn-sm">
-                <span class="fa-solid fa-person-circle-plus text-light h5 my-auto me-1"></span>
-                <span class="text-light">Thêm mới nhân viên</span>
-            </button>
-        </a>
+        <button class="btn btn-success btn-outline-secondary btn-sm" data-bs-toggle="modal"
+                data-bs-target="#addEmployee">
+            <span class="fa-solid fa-person-circle-plus text-light h5 my-auto me-1"></span>
+            <span class="text-light"> Thêm mới nhân viên</span>
+        </button>
+        <!--        <a th:href="@{/employee/create}">-->
+        <!--            <button class="btn btn-success btn-outline-secondary btn-sm">-->
+        <!--                <span class="fa-solid fa-person-circle-plus text-light h5 my-auto me-1"></span>-->
+        <!--                <span class="text-light">Thêm mới nhân viên</span>-->
+        <!--            </button>-->
+        <!--        </a>-->
 
         <form th:action="@{employee}" class="d-flex my-2" role="search" method="get">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
@@ -93,7 +98,9 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary center-pill" data-bs-dismiss="modal">Đóng</button>
+                                <button type="button" class="btn btn-secondary center-pill" data-bs-dismiss="modal">
+                                    Đóng
+                                </button>
                                 <button type="submit" class="btn btn-outline-success">Xóa</button>
                             </div>
 
@@ -109,6 +116,118 @@
     </tr>
     </tbody>
 </table>
+<div class="modal fade" id="addEmployee" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="border border-2 border-success p-3 rounded formCSS" th:action="@{/employee/create}"
+                  th:object="${employeeDto}" method="POST" novalidate="novalidate">
+                <div class="modal-header">
+                    <h2 class="text-center fw-bold">Thêm mới nhân viên</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <input type="hidden" th:field="*{id}"/>
+
+                    <div class="form-group">
+                        <label class="h6">Tên nhân viên:</label>
+                        <input type="text" class="form-control" placeholder="Nhập tên nhân viên.."
+                               th:field="*{name}" required
+                               pattern="^([\p{Lu}][\p{Ll}]{1,8})(\s([\p{Lu}]|[\p{Lu}][\p{Ll}]{1,10})){0,5}$"
+                               title="Tên nhân viên không được chứa số, và các kí tự đầu tiên của mỗi từ phải viết hoa."/>
+                    </div>
+
+                    <div class="mt-3 form-group">
+                        <label class="h6">Ngày sinh:</label>
+                        <input type="date" class="form-control" th:field="*{birthday}"
+                               th:min="${minAge}" th:max="${maxAge}"/>
+                    </div>
+
+
+                    <div class="mt-3 form-group">
+                        <label class="h6">Số CMND:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Nhập số CMND/CCCD.."
+                                   th:field="*{idCard}" required pattern="^\d{9}|\d{12}$"
+                                   title="Số CMND/CCCD phải đúng định dạng XXXXXXXXX hoặc XXXXXXXXXXXX (X là số 0-9)."/>
+                        </div>
+                    </div>
+
+
+                    <div class="mt-3 form-group">
+                        <label class="h6">Lương:</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" placeholder="Nhập lương..."
+                                   th:field="*{salary}" required pattern="^[1-9]\d*$"
+                                   title="Lương (VNĐ) phải là số nguyên dương."/>
+                        </div>
+                    </div>
+
+                    <div class="mt-3 form-group">
+                        <label class="h6">Số điện thoại:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Nhập SĐT.."
+                                   th:field="*{numberPhone}" required pattern="^(0|[(]84[)][+])9[01]\d{7}$"
+                                   title="Số điện thoại phải đúng định dạng 090xxxxxxx hoặc 091xxxxxxx hoặc (84)+90xxxxxxx hoặc (84)+91xxxxxxx."/>
+                        </div>
+                    </div>
+
+
+                    <div class="mt-3 form-group">
+                        <label class="h6">Email:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Nhập email.."
+                                   th:field="*{email}" required
+                                   pattern="^[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]{2,}(\.[A-Za-z0-9]{2,}){1,2}$"
+                                   title="Địa chỉ email phải đúng định dạng."/>
+                        </div>
+                    </div>
+
+                    <div class="mt-3 form-group">
+                        <label class="h6">Địa chỉ:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Nhập địa chỉ.."
+                                   th:field="*{address}" required pattern="^.+$"
+                                   title="Vui lòng không để trống địa chỉ."/>
+                        </div>
+                    </div>
+
+                    <div class="mt-3 form-group">
+                        <label class="h6">Chức vụ:</label>
+                        <div class="input-group">
+                            <select th:field="*{position}" class="form-control">
+                                <option th:each="item : ${positionList}" th:value="${item.id}" th:text="${item.name}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mt-3 form-group">
+                        <label class="h6">Phòng ban:</label>
+                        <div class="input-group">
+                            <select th:field="*{division}" class="form-control">
+                                <option th:each="item : ${divisionList}" th:value="${item.id}" th:text="${item.name}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mt-3 form-group">
+                        <label class="h6">Trình độ:</label>
+                        <div class="input-group">
+                            <select th:field="*{educationDegree}" class="form-control">
+                                <option th:each="item : ${educationDegreeList}" th:value="${item.id}"
+                                        th:text="${item.name}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-success" value="delete">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <div>
     <a th:href="@{'/employee'(page=${employeeList.number - 1},search=${search})}" th:if="${employeeList.hasPrevious()}">Previous</a>
     <span th:text="${employeeList.number + 1}"></span>/<span th:text="${employeeList.totalPages}"></span>

@@ -64,13 +64,13 @@
                 <input type="text" class="form-control" placeholder="Nhập địa chỉ" th:field="*{address}"/>
 
             </div>
-            <span style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+<!--            <span style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>-->
         </div>
 
         <div class="mt-3 form-group">
             <label class="h6">Chức vụ:</label>
             <div class="input-group">
-                <select th:field="*{position}" class="form-control">
+                <select th:field="*{position}" class="form-select">
                         <option th:each="item : ${positionList}" th:value="${item.id}" th:text="${item.name}"></option>
                 </select>
                 <span class="input-group-text"><i class="fa-solid fa-map"></i></span>
@@ -80,7 +80,7 @@
         <div class="mt-3 form-group">
             <label class="h6">Phòng ban:</label>
             <div class="input-group">
-                <select th:field="*{division}" class="form-control">
+                <select th:field="*{division}" class="form-select">
                     <option th:each="item : ${divisionList}" th:value="${item.id}" th:text="${item.name}"></option>
                 </select>
                 <span class="input-group-text"><i class="fa-brands fa-creative-commons-nd"></i></span>
@@ -90,7 +90,7 @@
         <div class="mt-3 form-group">
             <label class="h6">Trình độ:</label>
             <div class="input-group">
-                <select th:field="*{educationDegree}" class="form-control">
+                <select th:field="*{educationDegree}" class="form-select">
                     <option th:each="item : ${educationDegreeList}" th:value="${item.id}"
                             th:text="${item.name}"></option>
                 </select>

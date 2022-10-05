@@ -1,5 +1,5 @@
 <!DOCTYPE html >
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <link rel="shortcut icon" href="https://furamavietnam.com/wp-content/uploads/2018/07/favicon.png"
           type="image/x-icon">
@@ -43,74 +43,310 @@
         .body {
             background-image: url("https://img.wallpapersafari.com/desktop/1600/900/22/47/iU4Gez.jpg");
         }
+
+        .hotline-phone-ring-wrap {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 999999;
+        }
+
+        .hotline-phone-ring {
+            position: relative;
+            visibility: visible;
+            background-color: transparent;
+            width: 300px;
+            height: 110px;
+            cursor: pointer;
+            z-index: 11;
+            -webkit-backface-visibility: hidden;
+            -webkit-transform: translateZ(0);
+            transition: visibility .5s;
+            left: 0;
+            bottom: 0;
+            display: block;
+        }
+
+        .hotline-phone-ring-circle {
+            width: 85px;
+            height: 85px;
+            top: 10px;
+            left: 10px;
+            position: absolute;
+            background-color: transparent;
+            border-radius: 100%;
+            border: 2px solid #e60808;
+            -webkit-animation: phonering-alo-circle-anim 1.2s infinite ease-in-out;
+            animation: phonering-alo-circle-anim 1.2s infinite ease-in-out;
+            transition: all .5s;
+            -webkit-transform-origin: 50% 50%;
+            -ms-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+            opacity: 0.5;
+        }
+
+        .hotline-phone-ring-circle-fill {
+            width: 55px;
+            height: 55px;
+            top: 25px;
+            left: 25px;
+            position: absolute;
+            background-color: rgba(230, 8, 8, 0.7);
+            border-radius: 100%;
+            border: 2px solid transparent;
+            -webkit-animation: phonering-alo-circle-fill-anim 2.3s infinite ease-in-out;
+            animation: phonering-alo-circle-fill-anim 2.3s infinite ease-in-out;
+            transition: all .5s;
+            -webkit-transform-origin: 50% 50%;
+            -ms-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+        }
+
+        .hotline-phone-ring-img-circle {
+            background-color: #e60808;
+            width: 33px;
+            height: 33px;
+            top: 37px;
+            left: 37px;
+            position: absolute;
+            background-size: 20px;
+            border-radius: 100%;
+            border: 2px solid transparent;
+            -webkit-animation: phonering-alo-circle-img-anim 1s infinite ease-in-out;
+            animation: phonering-alo-circle-img-anim 1s infinite ease-in-out;
+            -webkit-transform-origin: 50% 50%;
+            -ms-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hotline-phone-ring-img-circle .pps-btn-img {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+        }
+
+        .hotline-phone-ring-img-circle .pps-btn-img img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .hotline-bar {
+            position: absolute;
+            background: rgba(230, 8, 8, 0.75);
+            height: 40px;
+            width: auto;
+            line-height: 40px;
+            border-radius: 3px;
+            padding: 0 10px;
+            background-size: 100%;
+            cursor: pointer;
+            transition: all 0.8s;
+            -webkit-transition: all 0.8s;
+            z-index: 9;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 50px !important;
+            /* width: 175px !important; */
+            left: 33px;
+            bottom: 37px;
+        }
+
+        .hotline-bar > a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+            text-indent: 50px;
+            display: block;
+            letter-spacing: 1px;
+            line-height: 40px;
+            font-family: Arial;
+        }
+
+        @-webkit-keyframes phonering-alo-circle-anim {
+            0% {
+                -webkit-transform: rotate(0) scale(0.5) skew(1deg);
+                -webkit-opacity: 0.1;
+            }
+            30% {
+                -webkit-transform: rotate(0) scale(0.7) skew(1deg);
+                -webkit-opacity: 0.5;
+            }
+            100% {
+                -webkit-transform: rotate(0) scale(1) skew(1deg);
+                -webkit-opacity: 0.1;
+            }
+        }
+
+        @-webkit-keyframes phonering-alo-circle-fill-anim {
+            0% {
+                -webkit-transform: rotate(0) scale(0.7) skew(1deg);
+                opacity: 0.6;
+            }
+            50% {
+                -webkit-transform: rotate(0) scale(1) skew(1deg);
+                opacity: 0.6;
+            }
+            100% {
+                -webkit-transform: rotate(0) scale(0.7) skew(1deg);
+                opacity: 0.6;
+            }
+        }
+
+        @-webkit-keyframes phonering-alo-circle-img-anim {
+            0% {
+                -webkit-transform: rotate(0) scale(1) skew(1deg);
+            }
+            10% {
+                -webkit-transform: rotate(-25deg) scale(1) skew(1deg);
+            }
+            20% {
+                -webkit-transform: rotate(25deg) scale(1) skew(1deg);
+            }
+            30% {
+                -webkit-transform: rotate(-25deg) scale(1) skew(1deg);
+            }
+            40% {
+                -webkit-transform: rotate(25deg) scale(1) skew(1deg);
+            }
+            50% {
+                -webkit-transform: rotate(0) scale(1) skew(1deg);
+            }
+            100% {
+                -webkit-transform: rotate(0) scale(1) skew(1deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hotline-bar {
+                display: none;
+            }
+        }
+
     </style>
 </head>
 <body>
 <header th:fragment="header">
-    <div class="container-fluid bg-gray-500 d-flex header" style="height: 100px">
-        <img class="h-100 p-4" src="https://www.furama.com/images/LOGOFurama_4C_Normal.png" alt="">
-        <img class="ms-5 ps-5"
-             src="https://furamavietnam.com/wp-content/uploads/2019/02/Ariyana-Tourism-Complex-02-2.png"
-             alt="">
-
-        <div class="container-fluid text-end my-4 me-4">
-            <span class="badge text-bg-warning mt-3"
-                  style="text-align: center; font-family: Comic Sans MS, Lucida Sans Unicode, sans-serif;"><a th:href="@{/logout}">Đăng xuất </a><i class="fa-solid fa-user"></i></span>
-        </div>
-    </div>
-
-    <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid mx-5">
-            <a class="navbar-brand font-weight-bold" href="/">Home</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item dropdown ms-3">
-                        <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">Employee</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{/employee}">Danh sách nhân viên</a></li>
-                            <li><a class="dropdown-item" th:href="@{/employee/create}">Thêm mới nhân viên</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item dropdown ms-3">
-                        <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">Customer</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{/customer}">Danh sách khách hàng</a></li>
-                            <li><a class="dropdown-item" th:href="@{/customer/create}">Thêm mới khách hàng</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item dropdown ms-3">
-                        <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">Service</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{/facility}">Danh sách dịch vụ</a></li>
-                            <li><a class="dropdown-item" th:href="@{/facility/create}">Thêm mới dịch vụ</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item dropdown ms-3">
-                        <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">Contract</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{/contract}">Danh sách hợp đồng</a></li>
-                            <li><a class="dropdown-item" th:href="@{/contract/create}">Thêm mới hợp đồng</a></li>
-                        </ul>
-                    </li>
-                </ul>
-
+    <div sec:authorize="isAuthenticated()">
+        <div class="container-fluid bg-gray-500 d-flex header" style="height: 100px">
+            <img class="h-100 p-4" src="https://www.furama.com/images/LOGOFurama_4C_Normal.png" alt="">
+            <img class="ms-5 ps-5"
+                 src="https://furamavietnam.com/wp-content/uploads/2019/02/Ariyana-Tourism-Complex-02-2.png"
+                 alt="">
+            <div class="container-fluid my-4 me-4">
+    <span class="badge mt-3" style="font-family: Comic Sans MS, Lucida Sans Unicode, sans-serif"> Xin chào <span
+            sec:authentication="principal.username"></span><span> <i
+            class="fa-solid fa-user"></i></span></span>
+            </div>
+            <div class="container-fluid text-end my-4 me-4">
+                <span class="badge text-bg-warning mt-3"
+                      style="text-align: center; font-family: Comic Sans MS, Lucida Sans Unicode, sans-serif;"><a
+                        th:href="@{/logout}"> Đăng xuất </a><i
+                        class="fa-solid fa-right-from-bracket"></i></span>
             </div>
         </div>
-    </nav>
-</header>
 
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid mx-5">
+                <a class="navbar-brand font-weight-bold" href="/">Trang chủ</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div sec:authorize="hasRole('ADMIN')">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown ms-3">
+                                <a class="nav-link dropdown-toggle text-dark" role="button"
+                                   data-bs-toggle="dropdown"
+                                   aria-expanded="false">Nhân viên</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" th:href="@{/employee}">Danh sách nhân viên</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/employee/create}">Thêm mới nhân
+                                        viên</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <!--                            <li class="nav-item dropdown ms-3">-->
+                            <!--                                <a class="nav-link dropdown-toggle text-dark" href="#" role="button"-->
+                            <!--                                   data-bs-toggle="dropdown"-->
+                            <!--                                   aria-expanded="false">Khách hàng</a>-->
+                            <!--                                <ul class="dropdown-menu">-->
+                            <!--                                    <li><a class="dropdown-item" th:href="@{/customer}">Danh sách khách hàng</a>-->
+                            <!--                                    </li>-->
+                            <!--                                    <li><a class="dropdown-item" th:href="@{/customer/create}">Thêm mới khách-->
+                            <!--                                        hàng</a>-->
+                            <!--                                    </li>-->
+                            <!--                                </ul>-->
+                            <!--                            </li>-->
+
+                            <!--                            <li class="nav-item dropdown ms-3">-->
+                            <!--                                <a class="nav-link dropdown-toggle text-dark" href="#" role="button"-->
+                            <!--                                   data-bs-toggle="dropdown"-->
+                            <!--                                   aria-expanded="false">Dịch vụ</a>-->
+                            <!--                                <ul class="dropdown-menu">-->
+                            <!--                                    <li><a class="dropdown-item" th:href="@{/facility}">Danh sách dịch vụ</a></li>-->
+                            <!--                                    <li><a class="dropdown-item" th:href="@{/facility/create}">Thêm mới dịch vụ</a>-->
+                            <!--                                    </li>-->
+                            <!--                                </ul>-->
+                            <!--                            </li>-->
+
+                            <li class="nav-item dropdown ms-3">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" role="button"
+                                   data-bs-toggle="dropdown"
+                                   aria-expanded="false">Hợp đồng</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" th:href="@{/contract}">Danh sách hợp đồng</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/contract/create}">Thêm mới hợp đồng</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <div sec:authorize="hasRole('USER')">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown ms-3">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" role="button"
+                                   data-bs-toggle="dropdown"
+                                   aria-expanded="false">Khách hàng</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" th:href="@{/customer}">Danh sách khách hàng</a>
+                                    </li>
+                                    <li><a class="dropdown-item" th:href="@{/customer/create}">Thêm mới khách
+                                        hàng</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown ms-3">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" role="button"
+                                   data-bs-toggle="dropdown"
+                                   aria-expanded="false">Dịch vụ</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" th:href="@{/facility}">Danh sách dịch vụ</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/facility/create}">Thêm mới dịch vụ</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+
+    </div>
+</header>
 <div class="container-fluid body" style="height: 520px">
     <div class="row mx-3">
         <div class="col-2 left">
@@ -161,7 +397,25 @@
 </div>
 
 <div class="container-fluid text-center footer" style="height: 50px">
-    <p class="text-light pt-2" style="text-align: center; font-family: Comic Sans MS, Lucida Sans Unicode, sans-serif;">Theo đuổi đam mê, Module 5 đang chờ bạn ! C05 Mãi đĩnh <3</p>
+    <p class="text-light pt-2" style="text-align: center; font-family: Comic Sans MS, Lucida Sans Unicode, sans-serif;">
+        Theo đuổi đam mê, Module 5 đang chờ bạn ! C05 Mãi đĩnh <3</p>
+</div>
+<div th:fragment="phone" class=" row hotline-phone-ring-wrap" style="transform: translateX(1250px)">
+    <div class="hotline-phone-ring">
+        <div class="hotline-phone-ring-circle"></div>
+        <div class="hotline-phone-ring-circle-fill"></div>
+        <div class="hotline-phone-ring-img-circle">
+            <a href="tel:0971118171" class="pps-btn-img">
+                <img src="https://nguyenhung.net/wp-content/uploads/2019/05/icon-call-nh.png" alt="Gọi điện thoại"
+                     width="50">
+            </a>
+        </div>
+    </div>
+    <div class="hotline-bar">
+        <a href="tel:0971118171">
+            <span class="text-hotline">Mr.Thành 0388410323</span>
+        </a>
+    </div>
 </div>
 <th:block th:fragment="jscommon">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
